@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cwlsj31n1hkau"]
+
+[node name="Puzzle_Sudoku" type="CanvasLayer" unique_id=1968145249]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=781973137]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sudoku_Grid" type="GridContainer" parent="." unique_id=394374846]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3

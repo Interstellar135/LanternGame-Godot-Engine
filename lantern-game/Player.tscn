@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://20pij7odblop"]
+
+[ext_resource type="Script" uid="uid://cilhh6g2vynpl" path="res://Scripts/Player.gd" id="1_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://dmqorn26wv26n" path="res://Assets/58D3C3E762DCFF07EE9921E447143DE3(1).png" id="1_xhfnw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
+radius = 76.0
+height = 282.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kne1u"]
+radius = 123.0
+height = 354.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1475835882]
+position = Vector2(582, 326)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_kpjcp")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=508920027]
+shape = SubResource("CapsuleShape2D_kpjcp")
+
+[node name="BodyArt" type="Sprite2D" parent="." unique_id=2054621947]
+position = Vector2(-16, -22)
+scale = Vector2(0.17653601, 0.18841465)
+texture = ExtResource("1_xhfnw")
+
+[node name="Lantern_Muzzlerker2D" type="Marker2D" parent="BodyArt" unique_id=346017406]
+position = Vector2(-532.4693, 323.75403)
+
+[node name="Shield_VFX" type="Sprite2D" parent="." unique_id=539015031]
+visible = false
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=973452227]
+position = Vector2(-8, -3)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=91179586]
+position = Vector2(6, 3)
+shape = SubResource("CapsuleShape2D_kne1u")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=422597497]
+process_callback = 0
+limit_left = -1280
+limit_top = 0
+limit_right = 1280
+limit_bottom = 0
+position_smoothing_enabled = true
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=246821458]
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=956365345]
+
+[node name="SummonCircle" type="AnimatedSprite2D" parent="." unique_id=1681830062]
+visible = false
+scale = Vector2(0.1, 0.1)
+
+[node name="ShieldTimer" type="Timer" parent="." unique_id=1780925012]
+
+[node name="ShieldSprite" type="TextureRect" parent="." unique_id=1081253691]
+offset_right = 40.0
+offset_bottom = 40.0

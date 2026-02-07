@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b31lcxgkrkijx"]
+
+[ext_resource type="PackedScene" uid="uid://dbx75ia40ydg4" path="res://Scenes/LevelBase.tscn" id="1_54h7v"]
+
+[node name="Level_Indoor_F2" unique_id=1217666848 instance=ExtResource("1_54h7v")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="4" unique_id=1270767129]
+color = Color(0.19315353, 0.19315353, 0.19315353, 1)

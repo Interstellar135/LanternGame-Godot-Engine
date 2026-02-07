@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c7urx77fblxbs"]
+
+[node name="Puzzle_LightRay" type="CanvasLayer" unique_id=485636183]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=712568709]
+anchors_preset = -1
+anchor_right = 0.643
+anchor_bottom = 1.0
+offset_right = 14.263977
+offset_bottom = -1.0
+color = Color(0.011764706, 0.011764706, 0.011764706, 0.5019608)
+
+[node name="Rings" type="Node2D" parent="." unique_id=1524780935]
+
+[node name="Ring_Outer" type="Sprite2D" parent="Rings" unique_id=186286758]
+
+[node name="Ring_Middle" type="Sprite2D" parent="Rings" unique_id=1698163522]
+
+[node name="Ring_Inner" type="Sprite2D" parent="Rings" unique_id=371618700]
+
+[node name="CloseBtn" type="Button" parent="." unique_id=1217393198]
+offset_right = 8.0
+offset_bottom = 8.0
