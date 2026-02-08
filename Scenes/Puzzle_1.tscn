@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c7urx77fblxbs"]
+
+[ext_resource type="Script" uid="uid://7j8r4evlx2r5" path="res://Scripts/puzzles/puzzle_1.gd" id="1_mcrdx"]
+
+[node name="Puzzle_LightRay" type="CanvasLayer" unique_id=485636183]
+script = ExtResource("1_mcrdx")
+
+[node name="bg" type="ColorRect" parent="." unique_id=712568709]
+anchors_preset = -1
+anchor_right = 0.643
+anchor_bottom = 1.0
+offset_right = 14.263977
+offset_bottom = -1.0
+color = Color(0.011764706, 0.011764706, 0.011764706, 0.5019608)
+
+[node name="Rings" type="Node2D" parent="." unique_id=1524780935]
+
+[node name="ring_00" type="TextureButton" parent="Rings" unique_id=743493261]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ring_01" type="TextureButton" parent="Rings" unique_id=1360490979]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ring_02" type="TextureButton" parent="Rings" unique_id=1366158229]
+offset_right = 40.0
+offset_bottom = 40.0

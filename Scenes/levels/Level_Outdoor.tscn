@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bpxhqueuaoekj"]
+
+[ext_resource type="PackedScene" uid="uid://dbx75ia40ydg4" path="res://Scenes/LevelBase.tscn" id="1_mmict"]
+[ext_resource type="Texture2D" uid="uid://drngh587mlcjt" path="res://Assets/IMG_202602077056_2560x720.png" id="2_vwwwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmict"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwwwn"]
+size = Vector2(100, 720)
+
+[node name="LevelBase" unique_id=1217666848 instance=ExtResource("1_mmict")]
+
+[node name="Main_Background" parent="." index="0" unique_id=1716871808]
+texture = ExtResource("2_vwwwn")
+metadata/_edit_lock_ = true
+
+[node name="LeftBoundary" parent="Main_Background" index="0" unique_id=258658022]
+position = Vector2(-1330, 0)
+disable_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Main_Background/LeftBoundary" index="0" unique_id=1807930472]
+shape = SubResource("RectangleShape2D_mmict")
+
+[node name="RightBoundary" parent="Main_Background" index="1" unique_id=1945518600]
+position = Vector2(1330, 0)
+disable_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Main_Background/RightBoundary" index="0" unique_id=374308345]
+shape = SubResource("RectangleShape2D_vwwwn")
+
+[node name="Enemies" parent="." index="1" unique_id=575046373]
+position = Vector2(2, -4)
+
+[node name="trigger_1" type="Area2D" parent="." index="6" unique_id=1871671332]
+
+[node name="spawn" type="Marker2D" parent="." index="7" unique_id=1411321424]

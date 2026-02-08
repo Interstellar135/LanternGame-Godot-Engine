@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dnla8blmbd1ht"]
+
+[ext_resource type="Script" uid="uid://dtnebmx730xw6" path="res://Scripts/Enemy.gd" id="1_tt7e2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqquq"]
+radius = 147.0
+height = 450.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tt7e2"]
+radius = 203.0
+height = 516.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
+radius = 547.87225
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1816062643]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_tt7e2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=100207026]
+shape = SubResource("CapsuleShape2D_gqquq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1194688475]
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1134119069]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=716880126]
+shape = SubResource("CapsuleShape2D_tt7e2")
+
+[node name="Detection_Zone" type="Area2D" parent="." unique_id=845292997]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Zone" unique_id=656544311]
+shape = SubResource("CircleShape2D_s7bn3")
+
+[node name="Attack_Timer" type="Timer" parent="." unique_id=1779849542]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=843005022]

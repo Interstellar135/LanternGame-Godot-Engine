@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://dbx75ia40ydg4"]
+
+[ext_resource type="Script" uid="uid://kswads4goaxp" path="res://Scripts/QTEManager.gd" id="1_7375l"]
+[ext_resource type="PackedScene" uid="uid://20pij7odblop" path="res://Scenes/actors/Player.tscn" id="2_ilmpw"]
+[ext_resource type="Script" uid="uid://cmo5kxm6nnlwa" path="res://Scripts/puzzles/puzzle_manager.gd" id="3_7375l"]
+
+[node name="LevelBase" type="Node2D" unique_id=1217666848]
+
+[node name="Main_Background" type="Sprite2D" parent="." unique_id=1716871808]
+
+[node name="LeftBoundary" type="StaticBody2D" parent="Main_Background" unique_id=258658022]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/LeftBoundary" unique_id=1807930472]
+
+[node name="RightBoundary" type="StaticBody2D" parent="Main_Background" unique_id=1945518600]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/RightBoundary" unique_id=374308345]
+
+[node name="BottomBoundary" type="StaticBody2D" parent="Main_Background" unique_id=61931929]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/BottomBoundary" unique_id=872282830]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=575046373]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=450680823]
+
+[node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=345690154]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="Skill_Shield_Icon" type="TextureRect" parent="HUD" unique_id=211648788]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="QTE_Prompt" type="Label" parent="HUD" unique_id=1304794233]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="QTEPanel" type="Control" parent="HUD" unique_id=208426037]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CircleBackground" type="TextureRect" parent="HUD/QTEPanel" unique_id=1854254520]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KeyPromptContainer" type="HBoxContainer" parent="HUD/QTEPanel" unique_id=185574683]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Key1" type="TextureRect" parent="HUD/QTEPanel/KeyPromptContainer" unique_id=311095662]
+layout_mode = 2
+
+[node name="Key2" type="TextureRect" parent="HUD/QTEPanel/KeyPromptContainer" unique_id=808553072]
+layout_mode = 2
+
+[node name="Key3" type="TextureRect" parent="HUD/QTEPanel/KeyPromptContainer" unique_id=2086121934]
+layout_mode = 2
+
+[node name="TimerBar" type="ProgressBar" parent="HUD/QTEPanel" unique_id=1788559938]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="QTEManager" type="Node" parent="HUD/QTEPanel" unique_id=1045864777]
+script = ExtResource("1_7375l")
+
+[node name="Player" parent="." unique_id=1475835882 instance=ExtResource("2_ilmpw")]
+position = Vector2(-1180, 220)
+
+[node name="PuzzleLayer" type="CanvasLayer" parent="." unique_id=1903020158]
+visible = false
+
+[node name="PuzzleRoot" type="Control" parent="PuzzleLayer" unique_id=810436533]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fade_layer" type="CanvasLayer" parent="PuzzleLayer" unique_id=695679103]
+
+[node name="fade" type="ColorRect" parent="PuzzleLayer/fade_layer" unique_id=118467242]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="puzzle_hud" type="Control" parent="PuzzleLayer" unique_id=1510904015]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="esc" type="Button" parent="PuzzleLayer/puzzle_hud" unique_id=818909662]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "esc"
+
+[node name="submit" type="Button" parent="PuzzleLayer/puzzle_hud" unique_id=396995076]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "submit"
+
+[node name="reset" type="Button" parent="PuzzleLayer/puzzle_hud" unique_id=837541001]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "reset"
+
+[node name="Label" type="Label" parent="PuzzleLayer/puzzle_hud" unique_id=139097784]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PuzzleManager" type="Node2D" parent="." unique_id=612179296]
+script = ExtResource("3_7375l")
+
+[connection signal="pressed" from="PuzzleLayer/puzzle_hud/esc" to="PuzzleManager" method="_on_esc_pressed"]
