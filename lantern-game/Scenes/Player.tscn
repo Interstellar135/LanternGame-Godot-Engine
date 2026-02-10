@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://20pij7odblop"]
+
+[ext_resource type="Script" uid="uid://cilhh6g2vynpl" path="res://Scripts/player.gd" id="1_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://dmqorn26wv26n" path="res://Assets/58D3C3E762DCFF07EE9921E447143DE3(1).png" id="1_xhfnw"]
+[ext_resource type="PackedScene" uid="uid://b2hcjo1sus4qe" path="res://Scenes/Light_Projectile.tscn" id="2_dewec"]
+[ext_resource type="PackedScene" uid="uid://dtcqlll0ib2dy" path="res://Scenes/QTESystem.tscn" id="3_gntrk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kpjcp"]
+radius = 76.0
+height = 282.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kne1u"]
+radius = 123.0
+height = 354.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dewec"]
+bg_color = Color(0.035439864, 0.37993234, 0.17102197, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5882353, 0.49803922, 0.09411765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ixxa"]
+bg_color = Color(0.03529412, 0.38039216, 0.17254902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5882353, 0.49803922, 0.09411765, 1)
+
+[node name="Player" type="CharacterBody2D" unique_id=1475835882]
+position = Vector2(2, -17)
+collision_mask = 6
+script = ExtResource("1_kpjcp")
+bullet_scene = ExtResource("2_dewec")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=508920027]
+shape = SubResource("CapsuleShape2D_kpjcp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054621947]
+position = Vector2(-16, -22)
+scale = Vector2(0.17653601, 0.18841465)
+texture = ExtResource("1_xhfnw")
+
+[node name="LanternPos" type="Marker2D" parent="." unique_id=503080916]
+position = Vector2(71, 33)
+scale = Vector2(0.17653601, 0.18841465)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=973452227 groups=["player"]]
+position = Vector2(-8, -3)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=91179586]
+position = Vector2(6, 3)
+shape = SubResource("CapsuleShape2D_kne1u")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=422597497]
+process_callback = 0
+limit_left = -1280
+limit_top = 0
+limit_right = 1280
+limit_bottom = 0
+position_smoothing_enabled = true
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=246821458]
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=956365345]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=499722590]
+
+[node name="QTESystem" parent="." unique_id=1944017524 instance=ExtResource("3_gntrk")]
+
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1780925012]
+wait_time = 5.0
+one_shot = true
+
+[node name="ShieldSprite" type="TextureRect" parent="." unique_id=1081253691]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CombatExitTimer" type="Timer" parent="." unique_id=905252705]
+wait_time = 5.0
+one_shot = true
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=1087920729]
+wait_time = 3.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1038339296]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=611288385]
+custom_minimum_size = Vector2(250, 20)
+offset_left = -1250.0
+offset_top = -335.0
+offset_right = -1000.0
+offset_bottom = -308.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dewec")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5ixxa")
+show_percentage = false

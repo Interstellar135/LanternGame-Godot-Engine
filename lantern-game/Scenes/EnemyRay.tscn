@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cowpk4kabaspc"]
+
+[ext_resource type="Script" uid="uid://cmnvcil3uegij" path="res://Scripts/enemy_projectile.gd" id="1_cmdp4"]
+
+[node name="EnemyRay" type="Area2D" unique_id=711024124]
+script = ExtResource("1_cmdp4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1396362492]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121831299]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1265675594]

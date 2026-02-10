@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://diyuykqv1dmyh"]
+
+[ext_resource type="Script" uid="uid://b3v6402abf04q" path="res://Scripts/enemy_flyer.gd" id="1_p3j5t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3j5t"]
+bg_color = Color(0.654902, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg3rx"]
+bg_color = Color(0.654902, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="Enemy_Flyer" type="CharacterBody2D" unique_id=936692378]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_p3j5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1638639364]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1153914168]
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=769696909]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1351842345]
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1689840141]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1540950277]
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=61839752]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=711267144]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1651482910]
+
+[node name="PatrolTimer" type="Timer" parent="." unique_id=199758756]
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1908602473]
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=124142812]
+custom_minimum_size = Vector2(125, 10)
+offset_right = 4.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_p3j5t")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jg3rx")
+show_percentage = false

@@ -1,74 +1,139 @@
 [gd_scene format=3 uid="uid://dbx75ia40ydg4"]
 
-[ext_resource type="Script" uid="uid://kswads4goaxp" path="res://Scripts/QTEManager.gd" id="1_7375l"]
-[ext_resource type="PackedScene" uid="uid://20pij7odblop" path="res://Player.tscn" id="2_ilmpw"]
+[ext_resource type="Script" uid="uid://djf5rfufr6ogv" path="res://Scripts/level_controller.gd" id="1_ilmpw"]
+[ext_resource type="PackedScene" uid="uid://20pij7odblop" path="res://Scenes/Player.tscn" id="2_ilmpw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilmpw"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7375l"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dci62"]
+size = Vector2(2560, 50)
+
+[sub_resource type="GDScript" id="GDScript_wrhoe"]
+script/source = "# HUD.gd - 挂载到 CanvasLayer 节点（HUD）
+extends CanvasLayer  # 【关键】必须是 CanvasLayer！
+
+@onready var health_bar = $HealthBarBg/HealthBar as ProgressBar
+@onready var health_label = $HealthBarBg/HealthLabel as Label
+var player = null
+
+func _ready():
+	# 尝试获取Player（通过组\"player\"）
+	_find_player()
+	
+	# 安全兜底：每0.2秒检查Player（应对动态生成）
+	var check_timer = Timer.new()
+	check_timer.wait_time = 0.2
+	check_timer.one_shot = false
+	check_timer.timeout.connect(_find_player)
+	add_child(check_timer)  # CanvasLayer 继承 Node2D，支持 add_child
+	check_timer.start()
+
+func _find_player():
+	if player: return
+	var players = get_tree().get_nodes_in_group(\"player\")
+	if players.size() > 0:
+		player = players[0]
+		_connect_signals()
+		print(\"✅ HUD已连接Player！血条激活\")
+
+func _connect_signals():
+	if not player or not player.is_inside_tree() or not player.has_signal(\"health_changed\"):
+		return
+	player.health_changed.connect(_on_player_health_changed)
+	_on_player_health_changed(player.health, player.max_health)  # 初始化显示
+
+func _on_player_health_changed(current: int, max: int):
+	if health_bar:
+		health_bar.value = float(current) / max
+	if health_label:
+		health_label.text = \"%d/%d\" % [current, max]
+		# 血量低时变红（可选）
+		if current <= max * 0.3:
+			health_label.add_theme_color_override(\"font_color\", Color.RED)
+		else:
+			health_label.add_theme_color_override(\"font_color\", Color.WHITE)
+"
 
 [node name="LevelBase" type="Node2D" unique_id=1217666848]
+script = ExtResource("1_ilmpw")
 
 [node name="Main_Background" type="Sprite2D" parent="." unique_id=1716871808]
 
 [node name="LeftBoundary" type="StaticBody2D" parent="Main_Background" unique_id=258658022]
+position = Vector2(-1330, 0)
+disable_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/LeftBoundary" unique_id=1807930472]
+shape = SubResource("RectangleShape2D_ilmpw")
 
 [node name="RightBoundary" type="StaticBody2D" parent="Main_Background" unique_id=1945518600]
+position = Vector2(1330, 0)
+disable_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/RightBoundary" unique_id=374308345]
+shape = SubResource("RectangleShape2D_7375l")
 
 [node name="BottomBoundary" type="StaticBody2D" parent="Main_Background" unique_id=61931929]
+position = Vector2(0, 360)
+disable_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/BottomBoundary" unique_id=872282830]
+shape = SubResource("RectangleShape2D_dci62")
+
+[node name="StartPos" type="Marker2D" parent="." unique_id=424459132]
+position = Vector2(-1180, 220)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=575046373]
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=450680823]
+[node name="Interactables" type="Node2D" parent="." unique_id=1621365669]
 
-[node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=345690154]
-offset_right = 4.0
-offset_bottom = 27.0
-
-[node name="Skill_Shield_Icon" type="TextureRect" parent="HUD" unique_id=211648788]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="QTE_Prompt" type="Label" parent="HUD" unique_id=1304794233]
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="QTEPanel" type="Control" parent="HUD" unique_id=208426037]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CircleBackground" type="TextureRect" parent="HUD/QTEPanel" unique_id=1854254520]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="KeyPromptContainer" type="HBoxContainer" parent="HUD/QTEPanel" unique_id=185574683]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Key1" type="TextureRect" parent="HUD/QTEPanel/KeyPromptContainer" unique_id=311095662]
-layout_mode = 2
-
-[node name="Key2" type="TextureRect" parent="HUD/QTEPanel/KeyPromptContainer" unique_id=808553072]
-layout_mode = 2
-
-[node name="Key3" type="TextureRect" parent="HUD/QTEPanel/KeyPromptContainer" unique_id=2086121934]
-layout_mode = 2
-
-[node name="TimerBar" type="ProgressBar" parent="HUD/QTEPanel" unique_id=1788559938]
-layout_mode = 0
-offset_right = 4.0
-offset_bottom = 27.0
-
-[node name="QTEManager" type="Node" parent="HUD/QTEPanel" unique_id=1045864777]
-script = ExtResource("1_7375l")
+[node name="PuzzleTrigger" type="Area2D" parent="Interactables" unique_id=1166942450]
 
 [node name="Player" parent="." unique_id=1475835882 instance=ExtResource("2_ilmpw")]
 position = Vector2(-1180, 220)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=450680823]
+script = SubResource("GDScript_wrhoe")
+
+[node name="PauseMenu" type="Control" parent="HUD" unique_id=1158152201]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="HUD/PauseMenu" unique_id=1223054935]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/PauseMenu" unique_id=1406727851]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuContainer" type="VBoxContainer" parent="HUD/PauseMenu/CenterContainer" unique_id=152024599]
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/MenuContainer" unique_id=168062207]
+layout_mode = 2
+
+[node name="BtnSave" type="Button" parent="HUD/PauseMenu/CenterContainer/MenuContainer" unique_id=994771582]
+layout_mode = 2
+
+[node name="QuitBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/MenuContainer" unique_id=434794679]
+layout_mode = 2

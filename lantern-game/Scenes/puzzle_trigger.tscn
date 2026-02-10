@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://fpiq74nc7lud"]
+
+[ext_resource type="Script" uid="uid://bp27dmxsdeg1k" path="res://Scripts/puzzle_trigger.gd" id="1_m7xaw"]
+
+[node name="Area2D" type="Area2D" unique_id=1142482348]
+script = ExtResource("1_m7xaw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=922909764]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1055500309]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=576010265]
+
+[node name="Label" type="Label" parent="." unique_id=554199805]
+offset_right = 40.0
+offset_bottom = 23.0

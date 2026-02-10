@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dnla8blmbd1ht"]
+
+[ext_resource type="Script" uid="uid://dtnebmx730xw6" path="res://Scripts/enemy_crawler.gd" id="1_tt7e2"]
+[ext_resource type="PackedScene" uid="uid://cowpk4kabaspc" path="res://Scenes/EnemyRay.tscn" id="2_gb3k4"]
+[ext_resource type="Texture2D" uid="uid://dqnsahdu2yw4t" path="res://Assets/IMG_202602083242_191x228.png" id="2_s7bn3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqquq"]
+radius = 100.0
+height = 204.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tt7e2"]
+radius = 121.0
+height = 244.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
+radius = 169.23947
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gb3k4"]
+bg_color = Color(0.65356296, 2.6351586e-06, 6.256998e-07, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mkn4y"]
+bg_color = Color(0.654902, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="Enemy_crawler" type="CharacterBody2D" unique_id=1816062643]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_tt7e2")
+projectile_scene = ExtResource("2_gb3k4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=100207026]
+shape = SubResource("CapsuleShape2D_gqquq")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1194688475]
+texture = ExtResource("2_s7bn3")
+metadata/_edit_lock_ = true
+
+[node name="MuzzlePos" type="Marker2D" parent="." unique_id=230305413]
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1134119069]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=716880126]
+shape = SubResource("CapsuleShape2D_tt7e2")
+metadata/_edit_lock_ = true
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=845292997]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=656544311]
+shape = SubResource("CircleShape2D_s7bn3")
+metadata/_edit_lock_ = true
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1779849542]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=843005022]
+
+[node name="PatrolTimer" type="Timer" parent="." unique_id=1681292497]
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1340994993]
+custom_minimum_size = Vector2(125, 10)
+offset_left = -65.0
+offset_top = -146.0
+offset_right = 60.0
+offset_bottom = -119.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gb3k4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mkn4y")
+show_percentage = false
