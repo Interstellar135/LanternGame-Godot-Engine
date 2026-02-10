@@ -44,145 +44,152 @@ texture = ExtResource("2_o14tn")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(0.99429053, 1.0023733)
 mouse_filter = 2
 texture = ExtResource("3_sv1s5")
 
 [node name="tiles_layer" type="Control" parent="." unique_id=235025840]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="tile_00" type="TextureRect" parent="tiles_layer" unique_id=453885049]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("4_ojnjx")
 
 [node name="tile_01" type="TextureRect" parent="tiles_layer" unique_id=1913222111]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("5_byt8r")
 
 [node name="tile_02" type="TextureRect" parent="tiles_layer" unique_id=825982697]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("6_ep5rl")
 
 [node name="tile_03" type="TextureRect" parent="tiles_layer" unique_id=172482208]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("7_06tsk")
 
 [node name="tile_04" type="TextureRect" parent="tiles_layer" unique_id=1222904025]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("8_lxx5g")
 
 [node name="tile_05" type="TextureRect" parent="tiles_layer" unique_id=1213079473]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("9_yvhaw")
 
 [node name="tile_06" type="TextureRect" parent="tiles_layer" unique_id=99102885]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("10_iep6a")
 
 [node name="tile_07" type="TextureRect" parent="tiles_layer" unique_id=385515391]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("11_8456m")
 
 [node name="tile_08" type="TextureRect" parent="tiles_layer" unique_id=1510106390]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("12_502th")
 
 [node name="tile_09" type="TextureRect" parent="tiles_layer" unique_id=72819588]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("13_41s7o")
 
 [node name="tile_10" type="TextureRect" parent="tiles_layer" unique_id=1842670441]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("14_sp5wq")
 
 [node name="tile_11" type="TextureRect" parent="tiles_layer" unique_id=1456116300]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("15_2qaf1")
 
 [node name="tile_12" type="TextureRect" parent="tiles_layer" unique_id=1827271616]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("16_vfpb4")
 
 [node name="tile_13" type="TextureRect" parent="tiles_layer" unique_id=1553148277]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("17_0deg3")
 
 [node name="tile_14" type="TextureRect" parent="tiles_layer" unique_id=1034350144]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("18_qjmyw")
 
 [node name="tile_15" type="TextureRect" parent="tiles_layer" unique_id=1852325751]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("19_uia2h")
 
 [node name="tile_16" type="TextureRect" parent="tiles_layer" unique_id=1737427531]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("20_cgnwj")
 
 [node name="tile_17" type="TextureRect" parent="tiles_layer" unique_id=1770078826]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-scale = Vector2(0.99411535, 0.95295745)
-mouse_filter = 2
+scale = Vector2(1.0017424, 1.008254)
+mouse_filter = 0
 texture = ExtResource("21_qh8au")
 
 [node name="slots" type="Control" parent="." unique_id=1178793351]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="slot_00" type="TextureRect" parent="slots" unique_id=134986253]
 layout_mode = 0
@@ -190,7 +197,7 @@ offset_left = 441.0
 offset_top = 133.0
 offset_right = 561.0
 offset_bottom = 193.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_01" type="TextureRect" parent="slots" unique_id=714722476]
 layout_mode = 0
@@ -198,7 +205,7 @@ offset_left = 550.0
 offset_top = 129.0
 offset_right = 670.0
 offset_bottom = 189.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_02" type="TextureRect" parent="slots" unique_id=2076065270]
 layout_mode = 0
@@ -206,7 +213,7 @@ offset_left = 669.0
 offset_top = 124.0
 offset_right = 789.0
 offset_bottom = 184.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_03" type="TextureRect" parent="slots" unique_id=1796439101]
 layout_mode = 0
@@ -214,7 +221,7 @@ offset_left = 497.0
 offset_top = 418.0
 offset_right = 617.0
 offset_bottom = 478.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_04" type="TextureRect" parent="slots" unique_id=2077441131]
 layout_mode = 0
@@ -222,7 +229,8 @@ offset_left = 611.0
 offset_top = 419.0
 offset_right = 731.0
 offset_bottom = 479.0
-mouse_filter = 2
+scale = Vector2(1, 1.0575581)
+mouse_filter = 0
 
 [node name="slot_05" type="TextureRect" parent="slots" unique_id=1459336797]
 layout_mode = 0
@@ -230,7 +238,7 @@ offset_left = 724.0
 offset_top = 416.0
 offset_right = 844.0
 offset_bottom = 476.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_06" type="TextureRect" parent="slots" unique_id=787710717]
 layout_mode = 0
@@ -238,7 +246,7 @@ offset_left = 442.0
 offset_top = 540.0
 offset_right = 562.0
 offset_bottom = 600.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_07" type="TextureRect" parent="slots" unique_id=1985402938]
 layout_mode = 0
@@ -246,7 +254,7 @@ offset_left = 559.0
 offset_top = 538.0
 offset_right = 679.0
 offset_bottom = 598.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_08" type="TextureRect" parent="slots" unique_id=849201573]
 layout_mode = 0
@@ -255,7 +263,7 @@ offset_top = 201.0
 offset_right = 615.0
 offset_bottom = 261.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_09" type="TextureRect" parent="slots" unique_id=751077113]
 layout_mode = 0
@@ -264,7 +272,7 @@ offset_top = 305.0
 offset_right = 610.0
 offset_bottom = 365.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_10" type="TextureRect" parent="slots" unique_id=1039569343]
 layout_mode = 0
@@ -273,7 +281,7 @@ offset_top = 430.0
 offset_right = 607.0
 offset_bottom = 490.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_11" type="TextureRect" parent="slots" unique_id=1560859040]
 layout_mode = 0
@@ -282,7 +290,7 @@ offset_top = 184.0
 offset_right = 790.0
 offset_bottom = 244.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_12" type="TextureRect" parent="slots" unique_id=425636627]
 layout_mode = 0
@@ -291,7 +299,7 @@ offset_top = 304.0
 offset_right = 789.0
 offset_bottom = 364.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_13" type="TextureRect" parent="slots" unique_id=2834939]
 layout_mode = 0
@@ -300,7 +308,7 @@ offset_top = 129.0
 offset_right = 973.0
 offset_bottom = 189.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_14" type="TextureRect" parent="slots" unique_id=901581723]
 layout_mode = 0
@@ -309,7 +317,7 @@ offset_top = 312.0
 offset_right = 966.0
 offset_bottom = 372.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_15" type="TextureRect" parent="slots" unique_id=1468378336]
 layout_mode = 0
@@ -318,7 +326,7 @@ offset_top = 481.0
 offset_right = 974.0
 offset_bottom = 541.0
 rotation = 1.5707964
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_16" type="TextureRect" parent="slots" unique_id=1288441017]
 layout_mode = 0
@@ -326,7 +334,7 @@ offset_left = 677.0
 offset_top = 538.0
 offset_right = 797.0
 offset_bottom = 598.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="slot_17" type="TextureRect" parent="slots" unique_id=1254408533]
 layout_mode = 0
@@ -334,7 +342,7 @@ offset_left = 792.0
 offset_top = 243.0
 offset_right = 912.0
 offset_bottom = 303.0
-mouse_filter = 2
+mouse_filter = 0
 
 [node name="sucess_2" type="Control" parent="." unique_id=1479761913]
 visible = false

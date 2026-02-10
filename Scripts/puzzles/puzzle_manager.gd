@@ -37,7 +37,7 @@ func _ready() -> void:
 	_connect_hud_buttons_once()
 	_cache_hint_label()
 	_set_puzzle_ui_visible(false)
-	_debug("ready done")
+	_debug("ready done - PuzzleManager initialized")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -291,3 +291,11 @@ func _find_spawn_marker(root: Node) -> Marker2D:
 
 func _debug(msg: String) -> void:
 	print("[PuzzleManager] %s" % msg)
+
+
+
+func _on_reset_pressed() -> void:
+	pass # Replace with function body.
+
+func _on_submit_pressed() -> void:
+	pass # Replace with function body.

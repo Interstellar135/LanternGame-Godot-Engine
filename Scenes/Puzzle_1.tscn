@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://c7urx77fblxbs"]
 
 [ext_resource type="Script" uid="uid://7j8r4evlx2r5" path="res://Scripts/puzzles/puzzle_1.gd" id="1_mcrdx"]
+[ext_resource type="Texture2D" uid="uid://bk2laky6h8vvb" path="res://Assets/puzzles/puzzle_1/背景.PNG" id="2_qxwfy"]
+[ext_resource type="Texture2D" uid="uid://chftfaluh24yp" path="res://Assets/puzzles/puzzle_1/光图层.PNG" id="3_bwip5"]
 
-[node name="Puzzle_LightRay" type="CanvasLayer" unique_id=485636183]
+[node name="Puzzle_1" type="CanvasLayer" unique_id=485636183]
 script = ExtResource("1_mcrdx")
 
-[node name="bg" type="ColorRect" parent="." unique_id=712568709]
-anchors_preset = -1
-anchor_right = 0.643
+[node name="bg" type="TextureRect" parent="." unique_id=1069539156]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 14.263977
-offset_bottom = -1.0
-color = Color(0.011764706, 0.011764706, 0.011764706, 0.5019608)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qxwfy")
 
 [node name="Rings" type="Node2D" parent="." unique_id=1524780935]
 
@@ -26,3 +28,15 @@ offset_bottom = 40.0
 [node name="ring_02" type="TextureButton" parent="Rings" unique_id=1366158229]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="sucess_1" type="Control" parent="." unique_id=508059357]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lamp" type="TextureRect" parent="sucess_1" unique_id=709559487]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_bwip5")

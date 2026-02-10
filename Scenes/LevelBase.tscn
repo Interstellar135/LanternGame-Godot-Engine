@@ -120,5 +120,9 @@ offset_bottom = 23.0
 
 [node name="PuzzleManager" type="Node2D" parent="." unique_id=612179296]
 script = ExtResource("3_7375l")
+next_level_path_by_puzzle_id = null
+hud_hint_label_path = null
 
 [connection signal="pressed" from="PuzzleLayer/puzzle_hud/esc" to="PuzzleManager" method="_on_esc_pressed"]
+[connection signal="pressed" from="PuzzleLayer/puzzle_hud/submit" to="PuzzleManager" method="_on_submit_pressed"]
+[connection signal="pressed" from="PuzzleLayer/puzzle_hud/reset" to="PuzzleManager" method="_on_reset_pressed"]

@@ -20,32 +20,49 @@ var in_qte: bool = false
 var qte_screen_position: Vector2  # 用于调试绘制
 
 # ===== 节点引用 =====
-@onready var hurtbox = $Hurtbox
-@onready var attack_hitbox = $AttackHitbox  # 需提前添加
-@onready var anim_player = $AnimationPlayer
-@onready var shield_sprite = $ShieldSprite  # TextureRect（替换原Shield_VFX用途）
-@onready var shield_vfx = $Shield_VFX  # GPUParticles2D（仅激活瞬间特效）
-@onready var summon_circle = $SummonCircle  # Sprite2D（法阵底图，初始visible=false）
-@onready var summon_vfx = $SummonVFX  # GPUParticles2D（提灯光流特效）
-@onready var camera = $Camera2D
-@onready var qte_manager = get_node("/LevelBase/HUD/QTEPanel/QTEManager") as Node
-# ===== 节点引用（追加到现有@onready区域）=====
-@onready var body_art = $BodyArt  # 假设BodyArt是Sprite2D/AnimatedSprite2D（用于翻转朝向）
+@onready var hurtbox = get_node_or_null("Hurtbox")
+@onready var attack_hitbox = get_node_or_null("AttackHitbox")
+@onready var anim_player = get_node_or_null("AnimationPlayer")
+@onready var shield_sprite = get_node_or_null("ShieldSprite")
+@onready var shield_vfx = get_node_or_null("Shield_VFX")
+@onready var summon_circle = get_node_or_null("SummonCircle")
+@onready var summon_vfx = get_node_or_null("SummonVFX")
+@onready var camera = get_node_or_null("Camera2D")
+@onready var body_art = get_node_or_null("BodyArt")
+
+var qte_manager: Node = null
 
 func _ready():
+	# 获取 QTEManager（使用树查询而非绝对路径）
+	var root := get_tree().root
+	if root:
+		var qte_panel = root.find_child("QTEPanel", true, false)
+		if qte_panel:
+			qte_manager = qte_panel.find_child("QTEManager", true, false)
+	
 	# 信号连接（关键！避免运行时错误）
-	hurtbox.body_entered.connect(_on_hurtbox_entered)
+	if hurtbox:
+		hurtbox.body_entered.connect(_on_hurtbox_entered)
+	
 	if qte_manager:
-		qte_manager.qte_success.connect(_on_qte_success)
-		qte_manager.qte_failed.connect(_on_qte_failed)
-		qte_manager.qte_ended.connect(_on_qte_ended)
+		if qte_manager.has_signal("qte_success"):
+			qte_manager.qte_success.connect(_on_qte_success)
+		if qte_manager.has_signal("qte_failed"):
+			qte_manager.qte_failed.connect(_on_qte_failed)
+		if qte_manager.has_signal("qte_ended"):
+			qte_manager.qte_ended.connect(_on_qte_ended)
+	
 	add_to_group("player")
 	_update_shield_visibility()
 	health = max_health
+	print("[Player] _ready() completed")
 	
 	
 	
 func _update_animation(move_dir: float):
+	if anim_player == null:
+		return
+	
 	# 跳过动画更新：正在播放非移动类动画（召唤/受伤等）
 	if anim_player.current_animation == summon_animation_name or \
 		anim_player.current_animation == "hurt" or \
@@ -75,7 +92,7 @@ func _physics_process(delta: float):
 	velocity.x = move_dir * move_speed
 	
 	# 翻转角色朝向（假设默认朝右：move_dir>0=向右需翻转）
-	if body_art and move_dir != 0:
+	if body_art != null and move_dir != 0:
 		body_art.flip_h = move_dir > 0  # 向右移动时水平翻转
 	
 	# ===== 3. 动画状态机（智能切换）=====
@@ -99,7 +116,7 @@ func take_damage(amount: int):
 		emit_signal("shield_hit")
 		return
 	health = max(0, health - amount)
-	if health > 0:
+	if health > 0 and anim_player:
 		anim_player.play("hurt")
 	emit_signal("health_changed", health, max_health)
 	if health <= 0: _on_death()
@@ -117,20 +134,24 @@ func _input(event):
 func _start_summon_sequence():
 	in_qte = true
 	velocity = Vector2.ZERO  # 冻结移动，增强施法沉浸感
-	anim_player.play(summon_animation_name)  # 播放"提灯召唤"动画
+	if anim_player:
+		anim_player.play(summon_animation_name)  # 播放"提灯召唤"动画
 
 # 【AnimationPlayer关键帧调用】法阵完全展开时启动QTE
 func _on_summon_animation_keyframe():
 	# 1. 播放召唤粒子（提灯光流射向地面）
-	if summon_vfx: 
+	if summon_vfx != null: 
 		summon_vfx.emitting = true
 		summon_vfx.restart()
 	
 	# 2. 显示法阵并计算屏幕坐标（关键！）
-	if summon_circle:
+	if summon_circle != null:
 		summon_circle.visible = true
 		# 通过Camera2D将世界坐标转为屏幕坐标
-		qte_screen_position = camera.unproject_position(summon_circle.global_position)
+		if camera != null:
+			qte_screen_position = camera.unproject_position(summon_circle.global_position)
+		else:
+			qte_screen_position = summon_circle.global_position
 	
 	# 3. 生成随机三键序列（从预设池选）
 	var key_pool = ["l", "i", "n", "k"]
@@ -138,7 +159,7 @@ func _on_summon_animation_keyframe():
 	var sequence = key_pool.slice(0, 3)
 	
 	# 4. 通知QTE系统在法阵位置启动
-	if qte_manager and qte_manager.is_inside_tree():
+	if qte_manager != null and qte_manager.is_inside_tree():
 		qte_manager.start_at_position(qte_screen_position, sequence)
 	else:
 		push_error("QTEManager not found! Check node path.")
@@ -146,7 +167,7 @@ func _on_summon_animation_keyframe():
 # ===== QTE结果处理 =====
 func _on_qte_success(sequence: Array):
 	# 法阵成功反馈：金光脉冲
-	if summon_circle:
+	if summon_circle != null:
 		var original_modulate = summon_circle.modulate
 		summon_circle.modulate = Color.YELLOW
 		await get_tree().create_timer(0.1).timeout
@@ -157,7 +178,7 @@ func _on_qte_success(sequence: Array):
 	_update_shield_visibility()
 	
 	# 播放护盾激活特效（瞬间）
-	if shield_vfx:
+	if shield_vfx != null:
 		shield_vfx.restart()  # 仅播放一次
 	
 	# 播放成功音效（可选）
@@ -165,7 +186,7 @@ func _on_qte_success(sequence: Array):
 
 func _on_qte_failed():
 	# 失败反馈：法阵暗红闪烁
-	if summon_circle:
+	if summon_circle != null:
 		var original_modulate = summon_circle.modulate
 		summon_circle.modulate = Color(1, 0.3, 0.3)
 		await get_tree().create_timer(0.15).timeout
@@ -178,20 +199,20 @@ func _on_qte_ended():
 func _end_qte():
 	in_qte = false
 	# 淡出法阵（与QTEPanel同步）
-	if summon_circle and summon_circle.visible:
+	if summon_circle != null and summon_circle.visible:
 		var tween = create_tween()
 		tween.tween_property(summon_circle, "modulate:a", 0.0, 0.3)
 		tween.tween_callback(func():
 			summon_circle.visible = false
 			summon_circle.modulate.a = 1.0
-			if summon_vfx: summon_vfx.emitting = false
+			if summon_vfx != null: summon_vfx.emitting = false
 		)
 	# 恢复移动（如有冻结）
 	# velocity = Vector2.ZERO  # 根据实际需求
 
 # ===== 护盾管理 =====
 func _update_shield_visibility():
-	if shield_sprite:
+	if shield_sprite != null:
 		shield_sprite.visible = shield > 0
 		# 可选：动态透明度（护盾越少越透明）
 		# if shield_sprite.visible: shield_sprite.modulate.a = clamp(float(shield) / qte_shield_value, 0.3, 1.0)
@@ -207,7 +228,7 @@ func _draw():
 		draw_circle(qte_screen_position, 8, Color.RED)
 		
 		# Godot 4 正确用法：font=null, 对齐参数用整数, color放最后
-	draw_string(
+		draw_string(
 			null,  # font (null=使用默认字体)
 			qte_screen_position + Vector2(10, 0),  # 位置
 			"QTE CENTER",  # 文本
