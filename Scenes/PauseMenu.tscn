@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://br8idfpuxsfqd"]
+
+[ext_resource type="Script" uid="uid://bn28wq2r3qwos" path="res://Scripts/pause_menu.gd" id="1_lj4oq"]
+
+[node name="PauseMenu" type="Control" unique_id=1428559051]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lj4oq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1873806787]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=500184023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=361247648]
+layout_mode = 2
+
+[node name="标题" type="Label" parent="CenterContainer/VBoxContainer" unique_id=386818067]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "设置界面"
+horizontal_alignment = 1
+
+[node name="操作说明" type="Label" parent="CenterContainer/VBoxContainer" unique_id=398762465]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.77788156, 0.77788156, 0.7778816, 1)
+theme_override_font_sizes/font_size = 32
+text = "操作说明：
+[A / D]  移动
+[J]      攻击
+[E]      交互 
+[Q]      QTE技能
+[ESC]    暂停 / 返回"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer" unique_id=346840539]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=576684062]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "音量"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer" unique_id=1694825872]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="BtnResume" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1175279505]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "继续游戏"
+
+[node name="BtnMenu" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1066000332]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "返回主菜单"

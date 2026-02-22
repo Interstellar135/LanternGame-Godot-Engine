@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://ttdw4m2xln45"]
+
+[ext_resource type="PackedScene" uid="uid://dbx75ia40ydg4" path="res://Scenes/LevelBase.tscn" id="1_aisqq"]
+[ext_resource type="Texture2D" uid="uid://x2obddy6plar" path="res://Assets/Scene/2b7fe5ec5514a6ef4797e26167c5acc3.png" id="2_3n1jr"]
+[ext_resource type="PackedScene" uid="uid://diyuykqv1dmyh" path="res://Scenes/Enemy_flyer.tscn" id="3_ib07g"]
+
+[sub_resource type="Animation" id="Animation_aisqq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ib07g"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3n1jr"]
+_data = {
+&"RESET": SubResource("Animation_aisqq"),
+&"fade_in": SubResource("Animation_ib07g")
+}
+
+[node name="Level_Indoor_F1" unique_id=1217666848 instance=ExtResource("1_aisqq")]
+override_qte_setting = true
+force_qte_state = true
+
+[node name="Main_Background" parent="." index="0" unique_id=1716871808]
+texture = ExtResource("2_3n1jr")
+
+[node name="Enemy_Flyer" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="0" unique_id=936692378 instance=ExtResource("3_ib07g")]
+position = Vector2(63, -15)
+
+[node name="Enemy_Flyer2" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="1" unique_id=1624153870 instance=ExtResource("3_ib07g")]
+position = Vector2(444, -151)
+
+[node name="Enemy_Flyer3" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="2" unique_id=439391111 instance=ExtResource("3_ib07g")]
+position = Vector2(911, 0)
+
+[node name="PuzzleTrigger" parent="Interactables" parent_id_path=PackedInt32Array(1621365669) index="0" unique_id=1142482348]
+position = Vector2(-465, 110)
+
+[node name="Trigger_Sudoku" type="Area2D" parent="." index="4" unique_id=1701728129]
+
+[node name="Stairs_To_F2" type="Area2D" parent="." index="5" unique_id=545129285]
+
+[node name="PuzzleManager" parent="." index="8" unique_id=379915280]
+player_hud_path = NodePath("../Player/CanvasLayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=451967814]
+libraries/ = SubResource("AnimationLibrary_3n1jr")
+autoplay = &"fade_in"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="11" unique_id=1349296263]
+color = Color(0, 0, 0, 1)
+
+[editable path="Player"]

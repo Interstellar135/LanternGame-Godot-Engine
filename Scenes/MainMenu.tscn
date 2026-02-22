@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://d3ryvmj8rmsje"]
+
+[ext_resource type="Script" uid="uid://51mmhcll1t7e" path="res://Scripts/main_menu.gd" id="1_8um5k"]
+[ext_resource type="Texture2D" uid="uid://dac5kushnlsnj" path="res://Assets/Scene/Downloads_1770366605790 (1).png" id="1_df05h"]
+[ext_resource type="Texture2D" uid="uid://di3u088bp75qb" path="res://Assets/Scene/19e24ea8ef8e65ef57fd4a17db7de819.png" id="2_8um5k"]
+[ext_resource type="Texture2D" uid="uid://dsvw4yxfyxphw" path="res://Assets/Scene/22057ce61ef3f37aba52b0b71ef1f4c4_750-恢复的 (1)(1)(1).png" id="3_xim88"]
+[ext_resource type="Texture2D" uid="uid://dbuknp2ftm5nc" path="res://Assets/Scene/22057ce61ef3f37aba52b0的 (1)(1)(1).png" id="4_koqhg"]
+[ext_resource type="Texture2D" uid="uid://scvro3dpyvay" path="res://Assets/Scene/22057ce61ef3f37aba52b0b71ef1f4c4.png" id="5_cmrfp"]
+
+[sub_resource type="Animation" id="Animation_8um5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xim88"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_koqhg"]
+_data = {
+&"RESET": SubResource("Animation_8um5k"),
+&"fade_in": SubResource("Animation_xim88")
+}
+
+[node name="MainMenu" type="Control" unique_id=1865119645]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8um5k")
+
+[node name="Background" type="TextureRect" parent="." unique_id=650383582]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_df05h")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Title_Image" type="TextureRect" parent="." unique_id=106284030]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -610.0
+offset_top = -15.0
+offset_right = 41.0
+offset_bottom = 397.0
+grow_horizontal = 2
+texture = ExtResource("2_8um5k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Start_Button" type="TextureButton" parent="." unique_id=358779483]
+layout_mode = 0
+offset_left = 203.00002
+offset_top = 367.0
+offset_right = 402.0
+offset_bottom = 425.0
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("3_xim88")
+stretch_mode = 5
+
+[node name="Settings_Button" type="TextureButton" parent="." unique_id=996977952]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 456.00003
+offset_right = 367.0
+offset_bottom = 514.0
+scale = Vector2(1.8, 1.5)
+texture_normal = ExtResource("4_koqhg")
+stretch_mode = 5
+
+[node name="Quit_Button" type="TextureButton" parent="." unique_id=1326289087]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 551.0
+offset_right = 429.0
+offset_bottom = 609.0
+scale = Vector2(1.3, 1.3)
+texture_normal = ExtResource("5_cmrfp")
+stretch_mode = 5
+
+[node name="Credit" type="Label" parent="." unique_id=833205665]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1444732005]
+libraries/ = SubResource("AnimationLibrary_koqhg")
+autoplay = &"fade_in"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2119145612]
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="Start_Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Settings_Button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Quit_Button" to="." method="_on_quit_button_pressed"]

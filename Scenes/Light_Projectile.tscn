@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b2hcjo1sus4qe"]
+
+[ext_resource type="Script" uid="uid://o2it36vef1dq" path="res://Scripts/player_bullet.gd" id="1_mcttp"]
+[ext_resource type="Texture2D" uid="uid://ci46mty5lykg5" path="res://Assets/PlayerBullet/deed64d2a1e7a20c69a0fc2759703f65.png" id="2_7lsw6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3cgpj"]
+radius = 88.33333
+
+[node name="Light_Projectile" type="Area2D" unique_id=2010763188]
+scale = Vector2(0.6, 0.6)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_mcttp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1148636078]
+texture = ExtResource("2_7lsw6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=17544656]
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CircleShape2D_3cgpj")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=24660258]

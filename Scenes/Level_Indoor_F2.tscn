@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://b31lcxgkrkijx"]
+
+[ext_resource type="PackedScene" uid="uid://dbx75ia40ydg4" path="res://Scenes/LevelBase.tscn" id="1_54h7v"]
+[ext_resource type="Texture2D" uid="uid://c5e3npmu0guj5" path="res://Assets/Scene/01fbafa9faecc3a1e504c9935ff5555f.png" id="2_0fvqe"]
+[ext_resource type="PackedScene" uid="uid://dnla8blmbd1ht" path="res://Scenes/Enemy_crawler.tscn" id="3_gujr4"]
+[ext_resource type="Texture2D" uid="uid://dldui377xr57t" path="res://Assets/Scene/cd938cbd2934004fb9feac20cd4ea9a6.png" id="3_k2o34"]
+[ext_resource type="PackedScene" uid="uid://diyuykqv1dmyh" path="res://Scenes/Enemy_flyer.tscn" id="4_fp7s0"]
+
+[sub_resource type="Animation" id="Animation_k2o34"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lu2d8"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gujr4"]
+_data = {
+&"RESET": SubResource("Animation_k2o34"),
+&"fade_in": SubResource("Animation_lu2d8")
+}
+
+[node name="Level_Indoor_F2" unique_id=1217666848 instance=ExtResource("1_54h7v")]
+override_qte_setting = true
+force_qte_state = true
+
+[node name="Main_Background" parent="." index="0" unique_id=1716871808]
+texture = ExtResource("2_0fvqe")
+
+[node name="Enemy_crawler" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="0" unique_id=1816062643 instance=ExtResource("3_gujr4")]
+position = Vector2(0, 299)
+
+[node name="Enemy_Flyer" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="1" unique_id=936692378 instance=ExtResource("4_fp7s0")]
+position = Vector2(-189, -90)
+
+[node name="Enemy_crawler2" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="2" unique_id=88068205 instance=ExtResource("3_gujr4")]
+position = Vector2(492, 275)
+
+[node name="Enemy_Flyer2" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="3" unique_id=1879699466 instance=ExtResource("4_fp7s0")]
+position = Vector2(317, -94)
+
+[node name="PuzzleTrigger" parent="Interactables" parent_id_path=PackedInt32Array(1621365669) index="0" unique_id=1142482348]
+position = Vector2(3, 15)
+puzzle_id = &"puzzle_final"
+
+[node name="Map_Light" type="Sprite2D" parent="." index="4" unique_id=1208073966]
+visible = false
+texture = ExtResource("3_k2o34")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="9" unique_id=2062129858]
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10" unique_id=1428334855]
+libraries/ = SubResource("AnimationLibrary_gujr4")
+autoplay = &"RESET"
+
+[editable path="Player"]

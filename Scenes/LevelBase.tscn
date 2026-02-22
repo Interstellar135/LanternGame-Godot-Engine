@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://dbx75ia40ydg4"]
+
+[ext_resource type="Script" uid="uid://djf5rfufr6ogv" path="res://Scripts/level_controller.gd" id="1_ilmpw"]
+[ext_resource type="PackedScene" uid="uid://fpiq74nc7lud" path="res://Scenes/puzzle_trigger.tscn" id="2_dci62"]
+[ext_resource type="PackedScene" uid="uid://20pij7odblop" path="res://Scenes/Player.tscn" id="2_ilmpw"]
+[ext_resource type="Script" uid="uid://cmo5kxm6nnlwa" path="res://Scripts/puzzle_manager.gd" id="3_7375l"]
+[ext_resource type="PackedScene" uid="uid://br8idfpuxsfqd" path="res://Scenes/PauseMenu.tscn" id="5_236eb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ilmpw"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7375l"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dci62"]
+size = Vector2(2560, 50)
+
+[sub_resource type="GDScript" id="GDScript_wrhoe"]
+script/source = "# HUD.gd - 挂载到 CanvasLayer 节点（HUD）
+extends CanvasLayer  # 【关键】必须是 CanvasLayer！
+
+@onready var health_bar = $HealthBarBg/HealthBar as ProgressBar
+@onready var health_label = $HealthBarBg/HealthLabel as Label
+var player = null
+
+func _ready():
+	# 尝试获取Player（通过组\"player\"）
+	_find_player()
+	
+	# 安全兜底：每0.2秒检查Player（应对动态生成）
+	var check_timer = Timer.new()
+	check_timer.wait_time = 0.2
+	check_timer.one_shot = false
+	check_timer.timeout.connect(_find_player)
+	add_child(check_timer)  # CanvasLayer 继承 Node2D，支持 add_child
+	check_timer.start()
+
+func _find_player():
+	if player: return
+	var players = get_tree().get_nodes_in_group(\"player\")
+	if players.size() > 0:
+		player = players[0]
+		_connect_signals()
+		print(\"✅ HUD已连接Player！血条激活\")
+
+func _connect_signals():
+	if not player or not player.is_inside_tree() or not player.has_signal(\"health_changed\"):
+		return
+	player.health_changed.connect(_on_player_health_changed)
+	_on_player_health_changed(player.health, player.max_health)  # 初始化显示
+
+func _on_player_health_changed(current: int, max: int):
+	if health_bar:
+		health_bar.value = float(current) / max
+	if health_label:
+		health_label.text = \"%d/%d\" % [current, max]
+		# 血量低时变红（可选）
+		if current <= max * 0.3:
+			health_label.add_theme_color_override(\"font_color\", Color.RED)
+		else:
+			health_label.add_theme_color_override(\"font_color\", Color.WHITE)
+"
+
+[node name="LevelBase" type="Node2D" unique_id=1217666848]
+script = ExtResource("1_ilmpw")
+
+[node name="Main_Background" type="Sprite2D" parent="." unique_id=1716871808]
+
+[node name="LeftBoundary" type="StaticBody2D" parent="Main_Background" unique_id=258658022]
+position = Vector2(-1330, 0)
+disable_mode = 1
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/LeftBoundary" unique_id=1807930472]
+shape = SubResource("RectangleShape2D_ilmpw")
+
+[node name="RightBoundary" type="StaticBody2D" parent="Main_Background" unique_id=1945518600]
+position = Vector2(1330, 0)
+disable_mode = 1
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/RightBoundary" unique_id=374308345]
+shape = SubResource("RectangleShape2D_7375l")
+
+[node name="BottomBoundary" type="StaticBody2D" parent="Main_Background" unique_id=61931929]
+position = Vector2(0, 360)
+disable_mode = 1
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main_Background/BottomBoundary" unique_id=872282830]
+shape = SubResource("RectangleShape2D_dci62")
+
+[node name="StartPos" type="Marker2D" parent="." unique_id=424459132]
+position = Vector2(-1180, 220)
+
+[node name="Enemies" type="Node2D" parent="." unique_id=575046373]
+
+[node name="Interactables" type="Node2D" parent="." unique_id=1621365669]
+
+[node name="PuzzleTrigger" parent="Interactables" unique_id=1142482348 instance=ExtResource("2_dci62")]
+
+[node name="Player" parent="." unique_id=1475835882 instance=ExtResource("2_ilmpw")]
+position = Vector2(-1180, 220)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=450680823]
+script = SubResource("GDScript_wrhoe")
+
+[node name="PauseMenu" parent="HUD" unique_id=1428559051 instance=ExtResource("5_236eb")]
+
+[node name="PuzzleManager" type="Node2D" parent="." unique_id=379915280]
+process_mode = 3
+script = ExtResource("3_7375l")
+next_level_path_by_puzzle_id = {
+"puzzle_1": "res://Scenes/Level_Indoor_F2.tscn",
+"puzzle_2": "res://Scenes/Level_Indoor_F1.tscn"
+}
+hud_hint_label_path = NodePath("../PuzzleLayer/puzzle_hud/Label")
+player_hud_path = NodePath("../Player/CanvasLayer")
+
+[node name="PuzzleLayer" type="CanvasLayer" parent="." unique_id=1817361746]
+process_mode = 3
+layer = 10
+
+[node name="PuzzleRoot" type="Control" parent="PuzzleLayer" unique_id=756064581]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fade_layer" type="CanvasLayer" parent="PuzzleLayer" unique_id=962509603]
+
+[node name="fade" type="ColorRect" parent="PuzzleLayer/fade_layer" unique_id=1255359319]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="puzzle_hud" type="Control" parent="PuzzleLayer" unique_id=334830813]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="esc" type="Button" parent="PuzzleLayer/puzzle_hud" unique_id=1110366786]
+layout_mode = 0
+offset_right = 33.0
+offset_bottom = 40.0
+focus_mode = 0
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "esc"
+
+[node name="submit" type="Button" parent="PuzzleLayer/puzzle_hud" unique_id=1666902459]
+layout_mode = 0
+offset_left = 51.0
+offset_right = 113.0
+offset_bottom = 40.0
+focus_mode = 0
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "submit"
+
+[node name="reset" type="Button" parent="PuzzleLayer/puzzle_hud" unique_id=1717028779]
+layout_mode = 0
+offset_left = 132.0
+offset_right = 180.0
+offset_bottom = 40.0
+focus_mode = 0
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "reset"
+
+[node name="Label" type="Label" parent="PuzzleLayer/puzzle_hud" unique_id=2142787496]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="PuzzleLayer/puzzle_hud/esc" to="PuzzleManager" method="_on_esc_pressed"]
+[connection signal="pressed" from="PuzzleLayer/puzzle_hud/submit" to="PuzzleManager" method="_on_submit_pressed"]
+[connection signal="pressed" from="PuzzleLayer/puzzle_hud/reset" to="PuzzleManager" method="_on_reset_pressed"]
+
+[editable path="Player"]

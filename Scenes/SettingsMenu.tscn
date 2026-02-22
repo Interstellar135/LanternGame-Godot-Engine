@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://bddc385yu8tes"]
+
+[ext_resource type="Script" uid="uid://bvpjm7glddaip" path="res://Scripts/settings_menu.gd" id="1_8uw7q"]
+[ext_resource type="Texture2D" uid="uid://dyrtfrkhfnscp" path="res://Assets/Scene/Downloads_1770377677021.png" id="2_bxjf0"]
+
+[node name="SettingsMenu" type="Control" unique_id=1242828004]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8uw7q")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1745025251]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bxjf0")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=537636173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer" unique_id=198598277]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+current_tab = 0
+
+[node name="世界观" type="ScrollContainer" parent="MarginContainer/TabContainer" unique_id=785765326]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/世界观" unique_id=490548897]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/世界观/VBoxContainer" unique_id=1998667341]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "游戏设定是蒸汽朋克+奇幻风的末日背景，故事中的这个世界依靠着全球各地的灯塔
+进行联结，也正是这些灯塔为全世界提供了能量，然而这样一种“联结”，在某次古老
+的危机中被彻底摧毁了，世界因此步入了末路。我们的主角是一位特殊的“提灯人”，
+他虽是一个机械造物，却有着人一般的灵魂与情感。他自有记忆以来，脑中就一直能
+听到一阵若有似无的呼唤，那声音驱使着他去寻找自己的身世，也告诉了他，那盏一
+直与他相伴的提灯存在着某种特殊的权能。在不断的摸索下，他发现自己能利用这盏
+提灯进行战斗，并点亮那些损毁的灯塔。主角为了追寻自己的身世之谜，也为了让世
+界重新联系在一起，决定踏上旅途，点亮那些损毁的灯塔。
+关于敌人的设定：因为灯塔损毁而异常运行的机械造物"
+
+[node name="操作说明" type="CenterContainer" parent="MarginContainer/TabContainer" unique_id=1296919548]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/操作说明" unique_id=94662501]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "[A / D]  移动
+[J]      攻击
+[E]      交互 / 解谜
+[Q]      发动QTE技能
+在一个法阵上按箭头顺序按下字母组合键
+即可成功发动无敌的护盾技能（有时效）
+[ESC]    暂停 / 返回"
+
+[node name="音量设置" type="VBoxContainer" parent="MarginContainer/TabContainer" unique_id=22266723]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="音量大小" type="Label" parent="MarginContainer/TabContainer/音量设置" unique_id=1709374013]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "音量调整"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/TabContainer/音量设置" unique_id=859389221]
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="BtnBack" type="Button" parent="." unique_id=416926663]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "返回主菜单"

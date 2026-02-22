@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bpxhqueuaoekj"]
+
+[ext_resource type="PackedScene" uid="uid://dbx75ia40ydg4" path="res://Scenes/LevelBase.tscn" id="1_mmict"]
+[ext_resource type="Texture2D" uid="uid://beiim8die2igu" path="res://Assets/Scene/4093a4e9ba84ab3ddd53ca7c3180a8f1.png" id="2_vwwwn"]
+[ext_resource type="PackedScene" uid="uid://dnla8blmbd1ht" path="res://Scenes/Enemy_crawler.tscn" id="3_vwwwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmict"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwwwn"]
+size = Vector2(103, 720)
+
+[sub_resource type="Animation" id="Animation_vwwwn"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0009999999, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_k3njf"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ypbjp"]
+_data = {
+&"RESET": SubResource("Animation_vwwwn"),
+&"fade_in": SubResource("Animation_k3njf")
+}
+
+[node name="LevelBase" unique_id=1217666848 instance=ExtResource("1_mmict")]
+override_qte_setting = true
+force_qte_state = true
+
+[node name="Main_Background" parent="." index="0" unique_id=1716871808]
+z_index = -100
+texture = ExtResource("2_vwwwn")
+metadata/_edit_lock_ = true
+
+[node name="LeftBoundary" parent="Main_Background" index="0" unique_id=258658022]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Main_Background/LeftBoundary" index="0" unique_id=1807930472]
+shape = SubResource("RectangleShape2D_mmict")
+
+[node name="RightBoundary" parent="Main_Background" index="1" unique_id=1945518600]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Main_Background/RightBoundary" index="0" unique_id=374308345]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_vwwwn")
+
+[node name="Enemy" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="0" unique_id=1816062643 instance=ExtResource("3_vwwwn")]
+position = Vector2(0, 270)
+
+[node name="Enemy_crawler" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="1" unique_id=777318717 instance=ExtResource("3_vwwwn")]
+position = Vector2(329, 268)
+
+[node name="Enemy_crawler2" parent="Enemies" parent_id_path=PackedInt32Array(575046373) index="2" unique_id=1053676041 instance=ExtResource("3_vwwwn")]
+position = Vector2(695, 263)
+
+[node name="PuzzleTrigger" parent="Interactables" parent_id_path=PackedInt32Array(1621365669) index="0" unique_id=1142482348]
+position = Vector2(1211, 137)
+puzzle_id = &"puzzle_2"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="8" unique_id=280468282]
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9" unique_id=1848670029]
+libraries/ = SubResource("AnimationLibrary_ypbjp")
+autoplay = &"fade_in"
+
+[editable path="Player"]

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dtcqlll0ib2dy"]
+
+[ext_resource type="Script" uid="uid://c8ot41hxt70kv" path="res://Scripts/QTESystem.gd" id="1_bfc75"]
+[ext_resource type="Texture2D" uid="uid://dsn36bxtqh6or" path="res://Assets/QTE-stuff/IMG_202602112308_300x300.png" id="2_c10tf"]
+[ext_resource type="Texture2D" uid="uid://bksp6row23bia" path="res://Assets/QTE-stuff/微信图片_20260213122834_68_23.png" id="3_c10tf"]
+
+[node name="QTESystem" type="Node2D" unique_id=1944017524]
+z_index = 50
+script = ExtResource("1_bfc75")
+
+[node name="MagicCircleSprite" type="Sprite2D" parent="." unique_id=694690810]
+position = Vector2(0, 2.3841858e-07)
+texture = ExtResource("2_c10tf")
+metadata/_edit_lock_ = true
+
+[node name="LettersRoot" type="Node2D" parent="." unique_id=629546775]
+z_index = 1
+
+[node name="TopPoint" type="Marker2D" parent="LettersRoot" unique_id=2115745228]
+position = Vector2(0, -60)
+
+[node name="RightPoint" type="Marker2D" parent="LettersRoot" unique_id=901882971]
+position = Vector2(50, 25)
+
+[node name="LeftPoint" type="Marker2D" parent="LettersRoot" unique_id=1106520828]
+position = Vector2(-50, 25)
+
+[node name="Label1" type="Label" parent="LettersRoot" unique_id=1822253025]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="Label2" type="Label" parent="LettersRoot" unique_id=73276923]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.05490196, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="Label3" type="Label" parent="LettersRoot" unique_id=912022025]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="Arrow1" type="Sprite2D" parent="LettersRoot" unique_id=320160220]
+z_index = 2
+scale = Vector2(0.14960937, 0.1)
+texture = ExtResource("3_c10tf")
+
+[node name="Arrow2" type="Sprite2D" parent="LettersRoot" unique_id=646416816]
+z_index = 2
+scale = Vector2(0.14960937, 0.1)
+texture = ExtResource("3_c10tf")
+
+[node name="SuccessTimer" type="Timer" parent="." unique_id=453464610]

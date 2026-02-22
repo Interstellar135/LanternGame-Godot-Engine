@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://c7urx77fblxbs"]
+
+[ext_resource type="Script" uid="uid://7j8r4evlx2r5" path="res://Scripts/puzzles/puzzle_1.gd" id="1_mcrdx"]
+[ext_resource type="Texture2D" uid="uid://cbxapj610lsgr" path="res://Assets/Scene/F11E8A1800B6C3C999A85B1A8F0E16D6.png" id="2_f6ocp"]
+[ext_resource type="Texture2D" uid="uid://con2j5h5cuhbb" path="res://Assets/puzzles/puzzle_1/外齿轮.PNG" id="3_pyqrf"]
+[ext_resource type="Texture2D" uid="uid://cwawdcdnx4le1" path="res://Assets/puzzles/puzzle_1/中齿轮.PNG" id="4_f6ocp"]
+[ext_resource type="Texture2D" uid="uid://dgjnlm272mqye" path="res://Assets/puzzles/puzzle_1/内齿轮.PNG" id="5_f6ocp"]
+[ext_resource type="Texture2D" uid="uid://chftfaluh24yp" path="res://Assets/puzzles/puzzle_1/光图层.PNG" id="6_tfmhy"]
+
+[node name="Puzzle_1" type="CanvasLayer" unique_id=485636183 node_paths=PackedStringArray("rings")]
+script = ExtResource("1_mcrdx")
+rings = [NodePath("ring_00"), NodePath("ring_01"), NodePath("ring_02")]
+
+[node name="bg" type="TextureRect" parent="." unique_id=774690256]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_f6ocp")
+
+[node name="ring_00" type="TextureButton" parent="." unique_id=743493261]
+offset_right = 1280.0
+offset_bottom = 720.0
+pivot_offset = Vector2(653, 343)
+texture_normal = ExtResource("3_pyqrf")
+texture_pressed = ExtResource("3_pyqrf")
+texture_hover = ExtResource("3_pyqrf")
+texture_disabled = ExtResource("3_pyqrf")
+texture_focused = ExtResource("3_pyqrf")
+
+[node name="ring_01" type="TextureButton" parent="." unique_id=1360490979]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(653, 343)
+texture_normal = ExtResource("4_f6ocp")
+texture_pressed = ExtResource("4_f6ocp")
+texture_hover = ExtResource("4_f6ocp")
+texture_disabled = ExtResource("4_f6ocp")
+texture_focused = ExtResource("4_f6ocp")
+
+[node name="ring_02" type="TextureButton" parent="." unique_id=1366158229]
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(653, 343)
+texture_normal = ExtResource("5_f6ocp")
+texture_pressed = ExtResource("5_f6ocp")
+texture_hover = ExtResource("5_f6ocp")
+texture_disabled = ExtResource("5_f6ocp")
+texture_focused = ExtResource("5_f6ocp")
+
+[node name="sucess_1" type="TextureRect" parent="." unique_id=1303429599]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_tfmhy")

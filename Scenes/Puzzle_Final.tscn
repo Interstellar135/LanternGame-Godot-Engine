@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://um1ytagfdy34"]
+
+[ext_resource type="Script" uid="uid://bhlsgr08ed4l5" path="res://Scripts/puzzles/Puzzle_Final.gd" id="1_bxnjd"]
+
+[node name="PuzzleFinal" type="Control" unique_id=316569929]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bxnjd")

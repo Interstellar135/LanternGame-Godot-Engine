@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cowpk4kabaspc"]
+
+[ext_resource type="Script" uid="uid://cmnvcil3uegij" path="res://Scripts/enemy_projectile.gd" id="1_cmdp4"]
+[ext_resource type="Texture2D" uid="uid://dmyu320vy8q37" path="res://Assets/EnemyRay/124c01c18a3d1d4f06532a0d7cb687a1.png" id="2_wiil5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tb4b8"]
+size = Vector2(715, 60)
+
+[node name="EnemyRay" type="Area2D" unique_id=711024124]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_cmdp4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1396362492]
+texture = ExtResource("2_wiil5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121831299]
+position = Vector2(-345, 2)
+shape = SubResource("RectangleShape2D_tb4b8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1265675594]

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dcvkqm83tbbgu"]
+
+[ext_resource type="AudioStream" uid="uid://bwmmo61tflqu2" path="res://Assets/tilekid - you not the same.mp3" id="1_iysw5"]
+
+[node name="MusicManager" type="AudioStreamPlayer" unique_id=1695946285]
+stream = ExtResource("1_iysw5")
+autoplay = true

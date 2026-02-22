@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://fpiq74nc7lud"]
+
+[ext_resource type="Script" uid="uid://bp27dmxsdeg1k" path="res://Scripts/puzzle_trigger.gd" id="1_m7xaw"]
+[ext_resource type="Texture2D" uid="uid://107ekji44qjy" path="res://Assets/Scene/8fc0924614101c0d0b09bc15a5c143f2.png" id="2_i4hjq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qv6d6"]
+radius = 172.00291
+
+[node name="PuzzleTrigger" type="Area2D" unique_id=1142482348]
+collision_layer = 0
+script = ExtResource("1_m7xaw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=922909764]
+texture = ExtResource("2_i4hjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=576010265]
+shape = SubResource("CircleShape2D_qv6d6")
+
+[node name="Label" type="Label" parent="." unique_id=554199805]
+offset_right = 40.0
+offset_bottom = 23.0
